@@ -12,7 +12,8 @@ var PoweredUp = function(){
             try {
     			self.device = await navigator.bluetooth.requestDevice({
         			filters: [
-						{ namePrefix: 'HUB' }
+						{ namePrefix: 'HUB' },
+						{ services: self.serviceID.toString() }
 					],
         			optionalServices: [
         				self.serviceID.toString()
