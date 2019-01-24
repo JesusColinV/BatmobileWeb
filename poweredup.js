@@ -11,7 +11,9 @@ var PoweredUp = function(){
 		return new Promise(async function(resolve, reject){
             try {
     			self.device = await navigator.bluetooth.requestDevice({
-        			filters: [],
+        			filters: [
+						{ namePrefix: 'HUB' }
+					],
         			optionalServices: [
         				self.serviceID.toString()
         			]
