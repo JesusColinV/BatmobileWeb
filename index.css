@@ -1,0 +1,99 @@
+*{
+	font-family:Avenir, Calibri;
+	font-size: 15px;
+}
+
+html{
+	background:#220101;
+	margin:0; padding:0;
+}
+body{
+	margin:0; padding:0;
+}
+
+#out{
+	color: azure;
+}
+
+.consolas{
+	font-family: Consolas;
+}
+
+table{
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+tr{
+}
+
+th{
+	font-weight: bold;
+}
+
+th, td{
+	border:1px azure solid;
+	width:5px;
+	height:5px;
+	text-align: center;
+}
+
+.y-separator, .y-padding{
+	display:block;
+	clear:both;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+.x-separator{
+	display:inline;
+	margin-left:5px;
+	border-right:1px solid black;
+	margin-right:10px;
+}
+
+.x-padding{
+	display:inline-block;
+	width:5px;
+	padding: 5px 0px;
+}
+
+#controls, .controls{
+	background:azure;
+	padding: 10px;
+	border-bottom: 1px solid black;
+	margin-bottom: 10px;
+}
+
+.button {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+					supported by Chrome and Opera */
+
+	background-color: #008CBA; /* Green */
+	border: 2px solid #008CBA;
+	color: white;
+	padding: 5px 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	margin: 4px 2px;
+	cursor: pointer;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+}
+
+.button:hover{
+	background-color: white; /* Green */
+	border: 2px solid #008CBA;
+	color: #008CBA;
+}
+
+.button:active{
+	position:relative;
+	top:1px;
+}
