@@ -28,3 +28,7 @@ function log(msg){
 	console.log(msg);
 	document.getElementById("out").innerHTML += msg+"<br>"
 }
+
+function clearLogs(){
+	document.getElementById("out").innerHTML = ""
+}
