@@ -12,11 +12,11 @@ var PoweredUp = function(){
             try {
     			self.device = await navigator.bluetooth.requestDevice({
         			filters: [
-						{ namePrefix: 'HUB' },
-						{ services: self.serviceID.toString() }
+						{ namePrefix: 'HUB' }
+						//, { services: self.serviceID.toString() }
 					],
         			optionalServices: [
-        				self.serviceID.toString()
+        				'battery_service'
         			]
     			});
 
