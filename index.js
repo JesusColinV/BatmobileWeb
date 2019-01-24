@@ -9,7 +9,11 @@ var batmobile = new PoweredUp();
 
 /* Connect to device */
 document.getElementById('connect').addEventListener('click', function(e){
-	var c = batmobile.connect()
+	batmobile.connect().then(function(){
+		log("Truly connected!")
+	}, function(){
+		log("Connection failed...")
+	})
     log("Connected? "+c);
 });
 
