@@ -9,8 +9,10 @@ var batmobile = new PoweredUp();
 
 /* Connect to device */
 document.getElementById('connect').addEventListener('click', function(e){
-	batmobile.connect().then(function(){
-		log("Truly connected!")
+	batmobile.connect().then(function(device){
+		log(device+" "+batmobile.device);
+		log("Finally connected to "+batmobile.device.name+" ("+batmobile.device.id+")")
+		log("UUIDs: "+batmobile.uuids+" "+batmobile.uuids[0])
 	}, function(){
 		log("Connection failed...")
 	})
