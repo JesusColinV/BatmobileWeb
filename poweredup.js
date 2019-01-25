@@ -34,12 +34,39 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
 
 				log("Awaiting GATT connection...");
 
-				self.server = await self.device.gatt.connect();
+				//self.server = await self.device.gatt.connect();
 
-				self.service = await self.server.getPrimaryService('00001624-1212-efde-1623-785feabcd123');
+				self.device.gatt.connect().then(function(server){
+					log("GATT Server Connected! Awaiting service...")
+
+					self.server = server;
+
+					server.getPrimaryService(self.serviceID).then(function(service){
+						log("Service connected! Awaiting characteristic...");
+
+						self.service = service;
+
+						service.getCharacteristic(self.serviceID).then(function(characteristic){
+							self.characteristic = characteristic;
+							log("All connected!");
+						}, function(err){
+							log("Failed to connect to characteristic: "+err);
+						})
+					}, function(err){
+						log("Failed to connect to service: "+err);
+					});
+				}, function(err){
+					log("Failed to connect to server: "+err);
+				})
+
+				/*
+				log("GATT Connected. Awaiting connection to service...")
+				log(self.server)
+
+				self.service = await self.server.getPrimaryService(self.serviceID);
 
 				log("Service Connected. Awaiting connection to characteristic...")
-				/*log(self.service)
+				log(self.service)
 
 				sef.characteristic = await service.getCharacteristic(self.serviceID);
 				log(self.characteristic)
