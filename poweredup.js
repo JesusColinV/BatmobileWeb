@@ -36,14 +36,10 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
 
 				self.server = await self.device.gatt.connect();
 
-				log("GATT Connected. Awaiting connection to service...")
-				log(self.server)
-
-				/*
-				self.service = await self.server.getPrimaryService(self.serviceID);
+				self.service = await self.server.getPrimaryService('00001624-1212-efde-1623-785feabcd123');
 
 				log("Service Connected. Awaiting connection to characteristic...")
-				log(self.service)
+				/*log(self.service)
 
 				sef.characteristic = await service.getCharacteristic(self.serviceID);
 				log(self.characteristic)
