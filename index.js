@@ -12,7 +12,11 @@ document.getElementById('connect').addEventListener('click', function(e){
 	batmobile.connect().then(function(device){
 		log(device+" "+batmobile.device);
 		log("Finally connected to "+batmobile.device.name+" ("+batmobile.device.id+")")
-		log("UUIDs: "+batmobile.device.uuids+" "+batmobile.device.uuids[0])
+		log("UUIDs: ")
+		var uids = batmobile.device.uuids[0]
+		for(i=0;i<uids.length;i++){
+			log(i+": "+uids[i])
+		}
 	}, function(){
 		log("Connection failed...")
 	})
