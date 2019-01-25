@@ -25,7 +25,8 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
 					//"acceptAllDevices":true,
         			"optionalServices": [
         				'battery_service',
-						self.serviceID
+						self.serviceID,
+						"00001800-0000-1000-8000-00805f9b34fb"
         			]
     			});
 
