@@ -6,9 +6,12 @@ Controlling a Lego Batmobile with WebBluetooth
 - [LEGO App-Controlled Batmobile – Set 76122](https://www.lego.com/en-us/themes/dc-superheroes/products/app-controlled-batmobile-76112)
 - A browser that support WebBluetooth on your operating system
 
+## References
+
+Much of the bluetooth groundwork has been done by [JorgePe](https://github.com/JorgePe) in his [BOOST reverse engineering repo](https://github.com/JorgePe/BOOSTreveng)
+Additional required bluetooth Data sniffed using [nrF Connect for Mobile](https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp&hl=en_SG)
+
 Code referenced from: https://github.com/BluetoothRocks/Batmobile
-Bluetooth Data sniffed using **nrF Bluetooth Mobile**
-More info from [JorgePe reverse engineering repo](https://github.com/JorgePe/BOOSTreveng)
 
 ## How does this work?
 
@@ -16,7 +19,7 @@ The browser can connect to a Bluetooth LE device like the PowerFunctions Hub use
 
 The PowerFunctions Hub exposes a number of functions including the ability to change the direction and speed of the connected motors.
 
-IMPORTANT NOTE: Browser (preferably Chrome) AND computer must support Bluetooth 4.0 Low Energy (LE). Buy a dongle otherwise. Also works on mobile phones with BLE support. 
+IMPORTANT NOTE: Browser (preferably Chrome) AND computer must support Bluetooth 4.0 Low Energy (LE). Buy a dongle otherwise. Also works on mobile phones with BLE support.
 
 ## So how does the steering work?
 

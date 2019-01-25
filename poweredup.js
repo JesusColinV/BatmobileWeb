@@ -4,6 +4,7 @@ var PoweredUp = function(){
 	this.server = null;
 	this.service = null;
 	this.serviceID = "00001623-1212-efde-1623-785feabcd123";
+	this.characteristicID = "00001623-1212-efde-1623-785feabcd123";
 	this.characteristic = null;
 
 /*
@@ -48,17 +49,20 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
 
 						self.service = service;
 
-						service.getCharacteristic(self.serviceID).then(function(characteristic){
+						service.getCharacteristic(self.characteristicID).then(function(characteristic){
 							self.characteristic = characteristic;
 							log("All connected!");
-						}, function(err){
-							log("Failed to connect to characteristic: "+err);
+						}, function(e){
+							log(e);
+							reject(e);
 						})
-					}, function(err){
-						log("Failed to connect to service: "+err);
+					}, function(e){
+						log(e);
+						reject(e);
 					});
-				}, function(err){
-					log("Failed to connect to server: "+err);
+				}, function(e){
+					log(e);
+					reject(e);
 				})
 
 				/*
