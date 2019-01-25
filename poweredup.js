@@ -16,7 +16,7 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
 	this.connect = function(){
 		var self = this;
 		return new Promise(async function(resolve, reject){
-            try {
+            {//try {
     			self.device = await navigator.bluetooth.requestDevice({
         			"filters": [
 						{ namePrefix: 'HUB' },
@@ -74,12 +74,12 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
 
                 resolve(self.device);
     		}
-    		catch(error) {
+    		/*catch(error) {
     			log('Could not connect! ' + error);
     			self.connected = false;
 
                 reject();
-    		}
+    		}*/
         });
 	};
 
