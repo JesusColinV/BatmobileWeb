@@ -13,7 +13,8 @@ document.getElementById('connect').addEventListener('click', function(e){
 		log(device+" "+batmobile.device);
 		log("Finally connected to "+batmobile.device.name+" ("+batmobile.device.id+")")
 		log("UUIDs: ")
-		var uids = batmobile.device.uuids[0]
+		var uids = device.uuids
+		log(typeof uids)
 		log(uids.length)
 		for(i=0;i<uids.length;i++){
 			log(i+": "+uids[i])
