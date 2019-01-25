@@ -29,7 +29,6 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
     			});
 
 				self.connected = true;
-				log("Connected: "+self.connected);
 
 				self.device.addEventListener('gattserverdisconnected', self.disconnect.bind(self));
 
@@ -38,7 +37,9 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
 				self.server = await self.device.gatt.connect();
 
 				log("GATT Connected. Awaiting connection to service...")
+				log(self.server)
 
+				/*
 				self.service = await self.server.getPrimaryService(self.serviceID);
 
 				log("Service Connected. Awaiting connection to characteristic...")
@@ -46,6 +47,7 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
 
 				sef.characteristic = await service.getCharacteristic(self.serviceID);
 				log(self.characteristic)
+				*/
 
                 resolve(self.device);
     		}
