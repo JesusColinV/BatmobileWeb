@@ -3,7 +3,7 @@ var PoweredUp = function(){
 	this.connected = false;
 	this.server = null;
 	this.service = null;
-	this.serviceID = "00001623-1212-efde-1623-785feabcd123";
+	this.serviceID = "00001624-1212-efde-1623-785feabcd123";
 	this.characteristic = null;
 
 /*
@@ -19,12 +19,12 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
             try {
     			self.device = await navigator.bluetooth.requestDevice({
         			"filters": [
-						{ namePrefix: 'HUB' }
+						{ namePrefix: 'HUB' },
+						{ services: ['00001624-1212-efde-1623-785feabcd123']}
 					],
 					//"acceptAllDevices":true,
         			"optionalServices": [
-        				'battery_service',
-						'e0cbf06c-cd8b-4647-bb8a-263b43f0f974'
+        				'battery_service'
         			]
     			});
 
@@ -37,7 +37,11 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
 
 				self.server = await self.device.gatt.connect();
 
+				log("GATT Connected. Awaiting connection to service...")
+
 				self.service = await self.server.getPrimaryService(self.serviceID);
+
+				log("Service Connected. Awaiting connection to characteristic...")
 				log(self.service)
 
 				sef.characteristic = await service.getCharacteristic(self.serviceID);
