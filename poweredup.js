@@ -3,7 +3,7 @@ var PoweredUp = function(){
 	this.connected = false;
 	this.server = null;
 	this.service = null;
-	this.serviceID = "00001624-1212-efde-1623-785feabcd124";
+	this.serviceID = "00001623-1212-efde-1623-785feabcd123";
 	this.characteristic = null;
 
 /*
