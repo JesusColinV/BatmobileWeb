@@ -3,7 +3,7 @@ var PoweredUp = function(){
 	this.connected = false;
 	this.server = null;
 	this.service = null;
-	this.serviceID = 'e0cbf06c-cd8b-4647-bb8a-263b43f0f974';
+	this.serviceID = "00001623-1212-efde-1623-785feabcd123";
 	this.characteristic = null;
 
 /*
@@ -37,8 +37,11 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
 
 				self.server = await self.device.gatt.connect();
 
-				//self.service = await self.server.getPrimaryService(self.serviceID);
-				//sef.characteristic = await service.getCharacteristic(self.serviceID);
+				self.service = await self.server.getPrimaryService(self.serviceID);
+				log(self.service)
+
+				sef.characteristic = await service.getCharacteristic(self.serviceID);
+				log(self.characteristic)
 
                 resolve(self.device);
     		}
@@ -52,6 +55,7 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
 	};
 
 	this.disconnect = function(){
+		log("Disconnected!")
 		this.connected = false;
 	}
 
