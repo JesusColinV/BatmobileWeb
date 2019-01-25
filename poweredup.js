@@ -20,11 +20,12 @@ Association Endpoint Address: 90:84:2b:09:2e:7f
     			self.device = await navigator.bluetooth.requestDevice({
         			"filters": [
 						{ namePrefix: 'HUB' },
-						//{ services: ['00001624-1212-efde-1623-785feabcd123']}
+						{ services: [ self.serviceID ]}
 					],
 					//"acceptAllDevices":true,
         			"optionalServices": [
-        				'battery_service'
+        				'battery_service',
+						self.serviceID
         			]
     			});
 
