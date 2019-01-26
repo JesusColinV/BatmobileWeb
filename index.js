@@ -15,27 +15,32 @@ var keyCodes = {
 }
 var keyFunctions = {
 	"left_forward":{
-		"active": function(){ batmobile.motors.drive("left",127); },
-		"inactive":function(){ batmobile.motors.drive("left",0); }
+		"drive": function(){ batmobile.motors.drive("left",127); },
+		"stop":function(){ batmobile.motors.drive("left",0); }
 	},
 	"left_back":{
-		"active": function(){ batmobile.motors.drive("left",-127); },
-		"inactive":function(){ batmobile.motors.drive("left",0); }
+		"drive": function(){ batmobile.motors.drive("left",-127); },
+		"stop":function(){ batmobile.motors.drive("left",0); }
 	},
 	"right_forward":{
-		"active": function(){ batmobile.motors.drive("right",127); },
-		"inactive":function(){ batmobile.motors.drive("right",0); }
+		"drive": function(){ batmobile.motors.drive("right",127); },
+		"stop":function(){ batmobile.motors.drive("right",0); }
 	},
 	"right_back":{
-		"active": function(){ batmobile.motors.drive("right",-127); },
-		"inactive":function(){ batmobile.motors.drive("right",0); }
+		"drive": function(){ batmobile.motors.drive("right",-127); },
+		"stop":function(){ batmobile.motors.drive("right",0); }
 	}
 }
 
 var keyEvents = {}
 for(var _i in keyCodes){
 	for(_j=0;_j<keyCodes[_i].length;_j++){
-		keyEvents[keyCodes[_i][_j]] = Object.assign(keyFunctions[_i],{"name":_i});
+		keyEvents[keyCodes[_i][_j]] = Object.assign(
+			keyFunctions[_i],
+			{
+				"name":_i,
+				"active":false
+			});
 	}
 }
 
@@ -52,13 +57,24 @@ document.addEventListener("keydown", function(event){
 	var k = event.keyCode;
 
 	if(keyEvents.hasOwnProperty(k)){
-		keyEvents[k]["active"]; //it's a function so it should run as such
-		log("[COMMAND] "+keyEvents[k]["name"].replaceAll("_"," ").toTitleCase())
+		if(!keyEvents[k].active){
+			keyEvents[k]["drive"]();
+			keyEvents[k].active = true;
+
+			log("[COMMAND] "+keyEvents[k]["name"].replaceAll("_"," ").toTitleCase());
+		}
 	}
 })
 
 document.addEventListener("keyup", function(event){
+	var k = event.keyCode;
 
+	if(keyEvents.hasOwnProperty(k)){
+		keyEvents[k]["stop"]();
+		keyEvents[k].active = false;
+		
+		log("[COMMAND] Stop "+keyEvents[k]["name"].replaceAll("_"," ").toTitleCase()) //for logging purposes
+	}
 })
 
 //MISC. FUNCTIONS AND PROTOTYPES
