@@ -35,10 +35,6 @@ var PoweredUp = function(){
 						"00001800-0000-1000-8000-00805f9b34fb"
 	    			]
 				});
-
-				self.connected = true;
-
-				self.device.addEventListener('gattserverdisconnected', self.disconnect.bind(self));
 			} catch(e){
 				log("[ERROR] "+e);
 				return reject(e);
@@ -59,7 +55,12 @@ var PoweredUp = function(){
 					service.getCharacteristic(self.characteristicID).then(function(characteristic){
 						self.characteristic = characteristic;
 
+						self.connected = true;
+
+						self.device.addEventListener('gattserverdisconnected', self.disconnect.bind(self));
+
 						log("[INFO] Device connected!");
+
 						resolve(self.device);
 					}, function(e){
 						log("[ERROR] "+e);
@@ -77,8 +78,21 @@ var PoweredUp = function(){
 	};
 
 	this.disconnect = function(){
-		log("[INFO] Disconnected!")
-		this.connected = false;
+		if(this.connected){
+			log("[WARNING] No connected devices to disconnect.")
+			this.connected = false;
+		}
+		else{
+			try{
+				bluetoothDevice.gatt.disconnect();
+				log("[INFO] Bluetooth device disconnected.")
+			}
+			catch(err){
+				log("[ERROR] "+err)
+			}
+
+		}
+
 	}
 
 	this.isConnected = function(){
@@ -105,9 +119,10 @@ var PoweredUp = function(){
 			speed = Math.min(Math.max(speed,-this.max_speed),this.max_speed);
 
 			//Set port number:
-			// - Left/default: 0x00
-			// - Right: 0x01
-			port = (_port=="right" || _port==1)?0x01:0x00;
+			// - Right/default: 0x00
+			// - Left: 0x01
+			port = (_port=="left" || _port==1)?0x01:0x00;
+			speed = -1*(port^1)*speed; //right motor turns in the opposite (anti-clockwise) direction
 
 			cmd = new Uint8Array([
 				0x0a, 0x00, 0x81, port, 0x11, 0x60, 0x00, speed, time, 0x00

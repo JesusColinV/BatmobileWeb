@@ -1,17 +1,19 @@
 # WebBluetooth Batmobile
-Controlling a Lego Batmobile with WebBluetooth
+Controlling the LEGO Batmobile (76122) with WebBluetooth API
+
+Code will work for general PoweredUp and Boost motors as well
 
 ## What do I need?
 
 - [LEGO App-Controlled Batmobile – Set 76122](https://www.lego.com/en-us/themes/dc-superheroes/products/app-controlled-batmobile-76112)
-- A browser that support WebBluetooth on your operating system
+- A browser that supports WebBluetooth on your operating system
 
 ## References
 
 Much of the bluetooth groundwork has been done by [JorgePe](https://github.com/JorgePe) in his [BOOST reverse engineering repo](https://github.com/JorgePe/BOOSTreveng)
 Additional required bluetooth Data sniffed using [nrF Connect for Mobile](https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp&hl=en_SG)
 
-Code referenced from: https://github.com/BluetoothRocks/Batmobile
+Some code referenced from: https://github.com/BluetoothRocks/Batmobile
 
 ## How does this work?
 
