@@ -46,20 +46,19 @@ var PoweredUp = function(){
 
 			log("[INFO] Awaiting GATT connection...");
 
-			//self.server = await self.device.gatt.connect();
-
 			self.device.gatt.connect().then(function(server){
 				log("[INFO] GATT Server Connected! Awaiting service...")
 
 				self.server = server;
 
 				server.getPrimaryService(self.serviceID).then(function(service){
-					log("[INFO] Service connected! Awaiting characteristic...");
-
 					self.service = service;
+
+					log("[INFO] Service connected! Awaiting characteristic...");
 
 					service.getCharacteristic(self.characteristicID).then(function(characteristic){
 						self.characteristic = characteristic;
+
 						log("[INFO] Device connected!");
 						resolve(self.device);
 					}, function(e){
@@ -145,12 +144,18 @@ var PoweredUp = function(){
 		"active":false,
 		"send":function(_cmd){
 			this.queue.push(_cmd);
+
 			if(!this.active) this.run()
 		},
 		"push":function(_cmd){
 			this.push(_cmd)
 		},
 		"run":function(){
+			if(self.characteristic==null || !self.connected){
+				log("[ERROR] Batmobile is not connected!")
+				return;
+			}
+
 			//NOTE: this is refering to the 'command' object, not the global PoweredUp object.
 			if(this.queue.length==0){
 				this.active = false;
@@ -159,6 +164,7 @@ var PoweredUp = function(){
 
 			this.active = true;
 			_that = this;
+
 			self.characteristic.writeValue(this.queue.shift()).then(
 				() => _that.run() //run the next command
 			);
