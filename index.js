@@ -10,9 +10,9 @@ var batmobile = new PoweredUp();
 /* Connect to device */
 document.getElementById('connect').addEventListener('click', function(e){
 	batmobile.connect().then(function(device){
-		log("Connected to "+batmobile.device.name+" ("+batmobile.device.id+")")
+		log("[INFO] Paired with "+batmobile.device.name)
 	}, function(err){
-		log("Connection Failed..")
+		log("[ERROR] Connection Failed..")
 	})
 });
 
@@ -21,57 +21,37 @@ document.getElementById('connect').addEventListener('click', function(e){
 function executeCommand(value) {
 	let turn = document.getElementById('turn').checked;
 
+	if(!batmobile.isConnected()){
+		log("[ERROR] Batmobile lost connection!")
+		return;
+	}
+
     switch (value) {
         case 'forward':
-			if (batmobile.isConnected()) {
-				batmobile.drive(
-					126, -126
-				);
-			}
-
+			batmobile.drive(
+				126, -126
+			);
 			break;
-
         case 'reverse':
-        	updateCommand('reverse');
-
-			if (batmobile.isConnected()) {
-            	batmobile.drive(
-					-126, 126
-				);
-			}
-
+			batmobile.drive(
+				-126, 126
+			);
 			break;
-
         case 'right':
-        	updateCommand('right');
-
-			if (batmobile.isConnected()) {
-            	batmobile.drive(
-					turn ? -126 : 30, -126
-				);
-			}
-
+        	batmobile.drive(
+				turn ? -126 : 30, -126
+			);
 			break;
-
         case 'left':
-        	updateCommand('left');
-
-			if (batmobile.isConnected()) {
-            	batmobile.drive(
-					126, turn ? 126 : -30
-				);
-			}
-
+			batmobile.drive(
+				126, turn ? 126 : -30
+			);
 			break;
-
         case 'stop':
-        	updateCommand();
-
-			if (batmobile.isConnected()) {
-            	batmobile.stop();
-            }
-
+			batmobile.stop()
 			break;
-
+		default:
+			log("[ERROR] Invalid command "+value)
+			return;
     }
 }
