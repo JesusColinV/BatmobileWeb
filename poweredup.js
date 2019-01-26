@@ -86,7 +86,7 @@ var PoweredUp = function(){
 	}
 
 	this.motors = {
-		"max_speed":127,
+		"max_speed":126,
 		/* FUNCTIONS FOR ROBOT CONTROL */
 		/* FUNCTION driveMotor
 		 * @purpose Sends commands for the speeds of left and right motor.

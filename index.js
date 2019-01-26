@@ -15,20 +15,36 @@ var keyCodes = {
 }
 var keyFunctions = {
 	"left_forward":{
-		"drive": function(){ batmobile.motors.drive("left",127); },
-		"stop":function(){ batmobile.motors.drive("left",0); }
+		"drive": function(){
+			batmobile.motors.drive("left",batmobile.motors.max_speed);
+		},
+		"stop":function(){
+			batmobile.motors.drive("left",0);
+		}
 	},
 	"left_back":{
-		"drive": function(){ batmobile.motors.drive("left",-127); },
-		"stop":function(){ batmobile.motors.drive("left",0); }
+		"drive": function(){
+			batmobile.motors.drive("left",-batmobile.motors.max_speed);
+		},
+		"stop":function(){
+			batmobile.motors.drive("left",0);
+		}
 	},
 	"right_forward":{
-		"drive": function(){ batmobile.motors.drive("right",127); },
-		"stop":function(){ batmobile.motors.drive("right",0); }
+		"drive": function(){
+			batmobile.motors.drive("right",batmobile.motors.max_speed);
+		},
+		"stop":function(){
+			batmobile.motors.drive("right",0);
+		}
 	},
 	"right_back":{
-		"drive": function(){ batmobile.motors.drive("right",-127); },
-		"stop":function(){ batmobile.motors.drive("right",0); }
+		"drive": function(){
+			batmobile.motors.drive("right",-batmobile.motors.max_speed);
+		},
+		"stop":function(){
+			batmobile.motors.drive("right",0);
+		}
 	}
 }
 
@@ -57,7 +73,7 @@ document.addEventListener("keydown", function(event){
 	var k = event.keyCode;
 
 	if(keyEvents.hasOwnProperty(k)){
-		if(!keyEvents[k].active){
+		if(!keyEvents[k].active && batmobile.isConnected()){
 			keyEvents[k]["drive"]();
 			keyEvents[k].active = true;
 
@@ -69,10 +85,10 @@ document.addEventListener("keydown", function(event){
 document.addEventListener("keyup", function(event){
 	var k = event.keyCode;
 
-	if(keyEvents.hasOwnProperty(k)){
+	if(keyEvents.hasOwnProperty(k) && batmobile.isConnected()){
 		keyEvents[k]["stop"]();
 		keyEvents[k].active = false;
-		
+
 		log("[COMMAND] Stop "+keyEvents[k]["name"].replaceAll("_"," ").toTitleCase()) //for logging purposes
 	}
 })
