@@ -15,9 +15,11 @@ body{
 	display: flex;
 }
 
-.flex-container .flex-item{
+.flex-container .flex-item.flex-50{
 	flex: 50%;
-	bottom:0;
+}
+.flex-container .flex-item{
+	flex:auto;
 }
 
 .flex-container .flex-item:not(:first-child):not(.border-override){
@@ -60,9 +62,16 @@ th{
 	font-weight: bold;
 }
 
+tr:first-child{
+	border-bottom: 1px solid azure;
+}
+
 .control-table td, .control-table th{
+	text-align: center;
+	vertical-align: middle;
 	font-size:16px;
-	padding:2px 5px;
+	width:65px;
+	padding:3px 10px;
 }
 
 .y-separator, .y-padding{

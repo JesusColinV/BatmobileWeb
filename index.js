@@ -13,7 +13,7 @@ var keyCodes = {
 	"right_forward":[73],
 	"right_back":[75],
 	"forward":[38],
-	"backward":[40]
+	"backward":[40],
 	"left":[37],
 	"right":[39]
 }
@@ -68,8 +68,25 @@ var keyFunctions = {
 		"stop":function(){
 			batmobile.motors.stop();
 		}
+	},
+	"left":{
+		"drive": function(){
+			batmobile.motors.drive("right",batmobile.motors.max_speed);
+			batmobile.motors.drive("left",-batmobile.motors.max_speed);
+		},
+		"stop":function(){
+			batmobile.motors.stop();
+		}
+	},
+	"right":{
+		"drive": function(){
+			batmobile.motors.drive("right",-batmobile.motors.max_speed);
+			batmobile.motors.drive("left",batmobile.motors.max_speed);
+		},
+		"stop":function(){
+			batmobile.motors.stop();
+		}
 	}
-
 }
 
 var keyEvents = {}
