@@ -69,6 +69,11 @@ document.getElementById('connect').addEventListener('click', function(e){
 	})
 });
 
+/* Connect to device */
+document.getElementById('disconnect').addEventListener('click', function(e){
+	batmobile.disconnect();
+});
+
 document.addEventListener("keydown", function(event){
 	var k = event.keyCode;
 

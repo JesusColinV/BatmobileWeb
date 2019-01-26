@@ -90,7 +90,6 @@ var PoweredUp = function(){
 			catch(err){
 				log("[ERROR] "+err)
 			}
-
 		}
 
 	}
