@@ -7,6 +7,36 @@ var turn = false;
 
 var batmobile = new PoweredUp();
 
+var keyCodes = {
+	"left_forward":[87],
+	"left_back":[83],
+	"right_forward":[73],
+	"right_back":[75]
+}
+var keyFunctions = {
+	"left_forward":{
+		"active":batmobile.driveMotor("left",127)
+		"inactive":batmobile.driveMotor("left",0)
+	},
+	"left_back":{
+		"active":batmobile.driveMotor("left",-127)
+		"inactive":batmobile.driveMotor("left",0)
+	},
+	"right_forward":{
+		"active":batmobile.driveMotor("right",127)
+		"inactive":batmobile.driveMotor("right",0)
+	},
+	"right_back":{
+		"active":batmobile.driveMotor("right",-127)
+		"inactive":batmobile.driveMotor("right",0)
+	}
+}
+
+var keyEvents = {}
+for(var _i in keyCodes){
+
+}
+
 /* Connect to device */
 document.getElementById('connect').addEventListener('click', function(e){
 	batmobile.connect().then(function(device){
@@ -16,42 +46,10 @@ document.getElementById('connect').addEventListener('click', function(e){
 	})
 });
 
+document.addEventListener("keydown", function(event){
 
-/* Handle commands */
-function executeCommand(value) {
-	var turn = document.getElementById('turn').checked;
+})
 
-	if(!batmobile.isConnected()){
-		log("[ERROR] Batmobile lost connection!")
-		return;
-	}
+document.addEventListener("keyup", function(event){
 
-    switch (value) {
-        case 'forward':
-			batmobile.drive(
-				126, -126
-			);
-			break;
-        case 'reverse':
-			batmobile.drive(
-				-126, 126
-			);
-			break;
-        case 'right':
-        	batmobile.drive(
-				turn ? -126 : 30, -126
-			);
-			break;
-        case 'left':
-			batmobile.drive(
-				126, turn ? 126 : -30
-			);
-			break;
-        case 'stop':
-			batmobile.stop()
-			break;
-		default:
-			log("[ERROR] Invalid command "+value)
-			return;
-    }
-}
+})

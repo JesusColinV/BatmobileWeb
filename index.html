@@ -10,17 +10,24 @@
 	<body>
 		<div class="controls">
 			<h1 class="title">Batmobile Bluetooth Test
-				<div class="version">v2.1.0</div>
+				<div class="version">v2.2.0</div>
 			</h1>
 			<div>
 				<div class="button" id="connect">Connect</div>
 				<div onclick="clearLogs()" id="clearLogs" class="button">Clear Log</div>
 			</div>
 		</div>
-		<div id="logs">
-			<h1 class="smallcaps title">Logs</h1>
-			<div id="logs_out">
-				
+		<div id="main_container">
+			<div id="instructions" class="flex-item">
+				<h1 class="smallcaps title">Instructions</h1>
+				<p>LEFT Motor: <b>W/S</b> (forward/backward)</p>
+				<p>RIGHT Motor: <b>I/K</b> (forward/backward)</p>
+			</div>
+			<div id="logs" class="flex-item">
+				<h1 class="smallcaps title">Logs</h1>
+				<div id="logs_out">
+
+				</div>
 			</div>
 		</div>
 

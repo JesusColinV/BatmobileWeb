@@ -4,14 +4,26 @@
 }
 
 html{
-	background:#0f284a;
+	background:#222A38;
 	margin:0; padding:0;
 }
 body{
 	margin:0; padding:0;
 }
 
-#out, #logs{
+#main_container{
+	display: flex;
+}
+
+#main_container .flex-item{
+	flex: 50%;
+}
+
+#main_container .flex-item:not(:first-child){
+	border-left:1px azure solid;
+}
+
+#out, #logs, #instructions{
 	color:azure;
 	padding-left: 20px;
 }
@@ -20,8 +32,8 @@ h1.title{
 	font-size: 26px;
 }
 
-.controls h1.title, #controls h1.title{
-	color:#0f284a;
+.controls .title, #controls .title{
+	color:#2d3c5d;
 }
 
 .title.version{

@@ -18,8 +18,9 @@ var PoweredUp = function(){
 	Characteristic ID: 00001624-1212-efde-1623-785feabcd123
 	*/
 
+	var self = this;
+
 	this.connect = function(){
-		var self = this;
 		return new Promise(async function(resolve, reject){
             try{
 				self.device = await navigator.bluetooth.requestDevice({
@@ -85,17 +86,51 @@ var PoweredUp = function(){
 		return this.connected;
 	}
 
-	/* FUNCTIONS FOR ROBOT CONTROL */
-		//Drive function sends commands for the speeds of left and right motor.
-	this.drive = function(left, right) {
-		cmd = new Uint8Array([
-			0x08, 0x00, 0x81, 0x39, 0x11, 0x02, left, right
-		]);
-		this.command.push(cmd);
-	}
+	this.motors = {
+		"max_speed":127,
+		/* FUNCTIONS FOR ROBOT CONTROL */
+		/* FUNCTION driveMotor
+		 * @purpose Sends commands for the speeds of left and right motor.
+		 * 			Motors will run INDEFINITELY with this function
+		 *			until the stopMotors function is run
+		 * @params
+		 * - port: left or right motor?
+		 * - speed: speed of motor
+		 * - time: probably CPU ticks. 0 or null for infinite
+		*/
+		"drive":function(_port, speed, time){
+			if(!time || time == null || typeof time=="undefined"){
+				time = 0x00; //indefinite running
+			}
+			//Cap speed
+			speed = Math.min(Math.max(speed,-this.max_speed),this.max_speed);
 
-	this.stop = function(){
-		this.drive(0,0)
+			//Set port number:
+			// - Left/default: 0x00
+			// - Right: 0x01
+			port = (_port=="right" || _port==1)?0x01:0x00;
+
+			cmd = new Uint8Array([
+				0x0a, 0x00, 0x81, port, 0x11, 0x60, 0x00, speed, time, 0x00
+			]);
+
+			self.command.send(cmd);
+		},
+		/* FUNCTION driveInf (drive infinitely)
+		 * @purpose Sends commands for the speeds of left and right motor.
+		 * 			Motors will run INDEFINITELY with this function
+		 *			until the stopMotors function is run
+		 * @param - left, right: speed of left and right motor
+		*/
+		"driveInf" = function(left, right) {
+			cmd = new Uint8Array([
+				0x08, 0x00, 0x81, 0x39, 0x11, 0x02, left, right
+			]);
+			self.command.send(cmd);
+		},
+		"stop":function(){
+			this.drive(0,0)
+		}
 	}
 
 	this.command = {
@@ -108,15 +143,12 @@ var PoweredUp = function(){
 		*/
 		"queue":[],
 		"active":false,
-		"push":function(_cmd){
-			var _i;
-			/* //Note: command is an Array!
-			for(_i=0;_i<_cmd.length;_i++){
-				this.queue.push(_i)
-			}
-			*/
-			queue.push(_cmd);
+		"send":function(_cmd){
+			this.queue.push(_cmd);
 			if(!this.active) this.run()
+		},
+		"push":function(_cmd){
+			this.push(_cmd)
 		},
 		"run":function(){
 			//NOTE: this is refering to the 'command' object, not the global PoweredUp object.
@@ -127,8 +159,8 @@ var PoweredUp = function(){
 
 			this.active = true;
 			_that = this;
-			this.characteristic.writeValue(this.queue.shift()).then(
-				() => _that.run() //run the
+			self.characteristic.writeValue(this.queue.shift()).then(
+				() => _that.run() //run the next command
 			);
 		}
 	}
