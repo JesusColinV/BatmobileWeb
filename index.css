@@ -92,8 +92,18 @@ th, td{
 	margin-bottom: 10px;
 }
 
-#logs, #logs *{
+#logs *:not(.title):not(.button){
 	font-family: Consolas;
+}
+
+#clearLogsButton{
+	position: absolute;
+	margin:0px;
+	margin-left: 20px;
+}
+
+#clearLogsButton:active{
+	margin-top: 2px;
 }
 
 .smallcaps{
@@ -116,7 +126,9 @@ th, td{
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	margin: 4px 2px;
+	margin:4px 2px;
+	font-weight: normal;
+	font-variant-caps: normal;
 	cursor: pointer;
 	-webkit-transition-duration: 0.4s; /* Safari */
 	transition-duration: 0.4s;
@@ -128,7 +140,7 @@ th, td{
 	color: #008CBA;
 }
 
-.button:active{
+.button:not(#clearLogsButton):active{
 	position:relative;
 	top:1px;
 }

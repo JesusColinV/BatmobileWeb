@@ -15,7 +15,6 @@
 			<div>
 				<div class="button" id="connect">Connect</div>
 				<div class="button" id="disconnect">Disconnect</div>
-				<div onclick="clearLogs()" id="clearLogs" class="button">Clear Log</div>
 			</div>
 		</div>
 		<div id="main_container">
@@ -25,7 +24,9 @@
 				<p>RIGHT Motor: <b>I/K</b> (forward/backward)</p>
 			</div>
 			<div id="logs" class="flex-item">
-				<h1 class="smallcaps title">Logs</h1>
+				<h1 class="smallcaps title">Logs
+					<div onclick="clearLogs()" id="clearLogsButton" class="button">Clear</div>
+				</h1>
 				<div id="logs_out">
 
 				</div>
