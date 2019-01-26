@@ -101,43 +101,64 @@ for(var _i in keyCodes){
 	}
 }
 
-/* Connect to device */
-document.getElementById('connect').addEventListener('click', function(e){
-	batmobile.connect().then(function(device){
-		log("[INFO] Paired with "+batmobile.device.name)
-	}, function(err){
-		log("[ERROR] Connection Failed..")
-	})
-});
+function init(){
+	/* Initialise Joysticks */
+	var joyOpt = {
+		"limitStickTravel":true,
 
-/* Disconnect from device */
-document.getElementById('disconnect').addEventListener('click', function(e){
-	batmobile.disconnect();
-});
+	}
+	var leftJoyOpt = {
+		"container": document.getElementById("joystick1")
+	};
+	var rightJoyOpt = {
+		"container": document.getElementById("joystick2")
+	};
 
-document.addEventListener("keydown", function(event){
-	var k = event.keyCode;
+	var joysticks = {
+		"left": new Joystick(Object.assign(joyOpt,leftJoyOpt)),
+		"right": new Joystick(Object.assign(joyOpt,rightJoyOpt))
+	}
 
-	if(keyEvents.hasOwnProperty(k)){
-		if(!keyEvents[k].active && batmobile.isConnected()){
-			keyEvents[k]["drive"]();
-			keyEvents[k].active = true;
+	/* Connect to device */
+	document.getElementById('connect').addEventListener('click', function(e){
+		batmobile.connect().then(function(device){
+			log("[INFO] Paired with "+batmobile.device.name)
+		}, function(err){
+			log("[ERROR] Connection Failed..")
+		})
+	});
 
-			log("[COMMAND] "+keyEvents[k]["name"].replaceAll("_"," ").toTitleCase());
+	/* Disconnect from device */
+	document.getElementById('disconnect').addEventListener('click', function(e){
+		batmobile.disconnect();
+	});
+
+	document.addEventListener("keydown", function(event){
+		var k = event.keyCode;
+
+		if(keyEvents.hasOwnProperty(k)){
+			if(!keyEvents[k].active && batmobile.isConnected()){
+				keyEvents[k]["drive"]();
+				keyEvents[k].active = true;
+
+				log("[COMMAND] "+keyEvents[k]["name"].replaceAll("_"," ").toTitleCase());
+			}
 		}
-	}
-})
+	})
 
-document.addEventListener("keyup", function(event){
-	var k = event.keyCode;
+	document.addEventListener("keyup", function(event){
+		var k = event.keyCode;
 
-	if(keyEvents.hasOwnProperty(k) && batmobile.isConnected()){
-		keyEvents[k]["stop"]();
-		keyEvents[k].active = false;
+		if(keyEvents.hasOwnProperty(k) && batmobile.isConnected()){
+			keyEvents[k]["stop"]();
+			keyEvents[k].active = false;
 
-		log("[COMMAND] Stop "+keyEvents[k]["name"].replaceAll("_"," ").toTitleCase()) //for logging purposes
-	}
-})
+			log("[COMMAND] Stop "+keyEvents[k]["name"].replaceAll("_"," ").toTitleCase()) //for logging purposes
+		}
+	})
+}
+
+document.addEventListener("DOMContentLoaded", init);
 
 //MISC. FUNCTIONS AND PROTOTYPES
 String.prototype.replaceAll = function (find, rep) {

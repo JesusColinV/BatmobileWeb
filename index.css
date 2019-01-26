@@ -94,6 +94,12 @@ tr:first-child{
 	padding: 5px 0px;
 }
 
+#joystickControls{
+	background: rgba(255,255,255,0.5);
+	height:40px;
+	bottom:0px;
+}
+
 #controls, .controls{
 	background:azure;
 	padding: 10px;
