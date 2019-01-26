@@ -11,16 +11,16 @@ body{
 	margin:0; padding:0;
 }
 
-#main_container{
+.flex-container{
 	display: flex;
 }
 
-#main_container .flex-item{
+.flex-container .flex-item{
 	flex: 50%;
 	bottom:0;
 }
 
-#main_container .flex-item:not(:first-child){
+.flex-container .flex-item:not(:first-child):not(.border-override){
 	border-left:1px azure solid;
 }
 
@@ -29,8 +29,13 @@ body{
 	padding-left: 20px;
 }
 
-h1.title{
+h1{
 	font-size: 26px;
+}
+
+h2{
+	margin-top:0px;
+	font-size: 22px;
 }
 
 .controls .title, #controls .title{
@@ -51,18 +56,13 @@ table{
 	table-layout: fixed;
 }
 
-tr{
-}
-
 th{
 	font-weight: bold;
 }
 
-th, td{
-	border:1px azure solid;
-	width:5px;
-	height:5px;
-	text-align: center;
+.control-table td, .control-table th{
+	font-size:16px;
+	padding:2px 5px;
 }
 
 .y-separator, .y-padding{

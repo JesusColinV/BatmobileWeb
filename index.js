@@ -11,7 +11,11 @@ var keyCodes = {
 	"left_forward":[87],
 	"left_back":[83],
 	"right_forward":[73],
-	"right_back":[75]
+	"right_back":[75],
+	"forward":[38],
+	"backward":[40]
+	"left":[37],
+	"right":[39]
 }
 var keyFunctions = {
 	"left_forward":{
@@ -45,7 +49,27 @@ var keyFunctions = {
 		"stop":function(){
 			batmobile.motors.drive("right",0);
 		}
+	},
+
+	"forward":{
+		"drive": function(){
+			batmobile.motors.drive("right",batmobile.motors.max_speed);
+			batmobile.motors.drive("left",batmobile.motors.max_speed);
+		},
+		"stop":function(){
+			batmobile.motors.stop();
+		}
+	},
+	"backward":{
+		"drive": function(){
+			batmobile.motors.drive("right",batmobile.motors.max_speed);
+			batmobile.motors.drive("left",batmobile.motors.max_speed);
+		},
+		"stop":function(){
+			batmobile.motors.stop();
+		}
 	}
+
 }
 
 var keyEvents = {}
@@ -69,7 +93,7 @@ document.getElementById('connect').addEventListener('click', function(e){
 	})
 });
 
-/* Connect to device */
+/* Disconnect from device */
 document.getElementById('disconnect').addEventListener('click', function(e){
 	batmobile.disconnect();
 });
