@@ -19,7 +19,7 @@ document.getElementById('connect').addEventListener('click', function(e){
 
 /* Handle commands */
 function executeCommand(value) {
-	let turn = document.getElementById('turn').checked;
+	var turn = document.getElementById('turn').checked;
 
 	if(!batmobile.isConnected()){
 		log("[ERROR] Batmobile lost connection!")

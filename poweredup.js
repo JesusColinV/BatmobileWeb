@@ -21,22 +21,27 @@ var PoweredUp = function(){
 	this.connect = function(){
 		var self = this;
 		return new Promise(async function(resolve, reject){
-            self.device = await navigator.bluetooth.requestDevice({
-    			"filters": [
-					{ namePrefix: 'HUB' },
-					{ services: [ self.serviceID ]}
-				],
-				//"acceptAllDevices":true,
-    			"optionalServices": [
-    				'battery_service',
-					self.serviceID,
-					"00001800-0000-1000-8000-00805f9b34fb"
-    			]
-			});
+            try{
+				self.device = await navigator.bluetooth.requestDevice({
+	    			"filters": [
+						{ namePrefix: 'HUB' },
+						{ services: [ self.serviceID ]}
+					],
+					//"acceptAllDevices":true,
+	    			"optionalServices": [
+	    				'battery_service',
+						self.serviceID,
+						"00001800-0000-1000-8000-00805f9b34fb"
+	    			]
+				});
 
-			self.connected = true;
+				self.connected = true;
 
-			self.device.addEventListener('gattserverdisconnected', self.disconnect.bind(self));
+				self.device.addEventListener('gattserverdisconnected', self.disconnect.bind(self));
+			} catch(e){
+				log("[ERROR] "+e);
+				return reject(e);
+			}
 
 			log("[INFO] Awaiting GATT connection...");
 
@@ -58,15 +63,15 @@ var PoweredUp = function(){
 						resolve(self.device);
 					}, function(e){
 						log("[ERROR] "+e);
-						reject(e);
+						return reject(e);
 					})
 				}, function(e){
 					log("[ERROR] "+e);
-					reject(e);
+					return reject(e);
 				});
 			}, function(e){
 				log("[ERROR] "+e);
-				reject(e);
+				return reject(e);
 			})
         });
 	};
@@ -131,9 +136,10 @@ var PoweredUp = function(){
 
 function log(msg){
 	console.log(msg);
-	document.getElementById("out").innerHTML += msg+"<br>"
+	document.getElementById("logs_out").innerHTML += msg+"<br>";
 }
 
 function clearLogs(){
-	document.getElementById("out").innerHTML = ""
+	console.clear();
+	document.getElementById("logs_out").innerHTML = "";
 }
