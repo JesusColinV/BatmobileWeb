@@ -15,20 +15,20 @@ var keyCodes = {
 }
 var keyFunctions = {
 	"left_forward":{
-		"active":batmobile.driveMotor("left",127)
-		"inactive":batmobile.driveMotor("left",0)
+		"active":batmobile.motors.drive("left",127),
+		"inactive":batmobile.motors.drive("left",0)
 	},
 	"left_back":{
-		"active":batmobile.driveMotor("left",-127)
-		"inactive":batmobile.driveMotor("left",0)
+		"active":batmobile.motors.drive("left",-127),
+		"inactive":batmobile.motors.drive("left",0)
 	},
 	"right_forward":{
-		"active":batmobile.driveMotor("right",127)
-		"inactive":batmobile.driveMotor("right",0)
+		"active":batmobile.motors.drive("right",127),
+		"inactive":batmobile.motors.drive("right",0)
 	},
 	"right_back":{
-		"active":batmobile.driveMotor("right",-127)
-		"inactive":batmobile.driveMotor("right",0)
+		"active":batmobile.motors.drive("right",-127),
+		"inactive":batmobile.motors.drive("right",0)
 	}
 }
 

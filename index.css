@@ -17,6 +17,7 @@ body{
 
 #main_container .flex-item{
 	flex: 50%;
+	bottom:0;
 }
 
 #main_container .flex-item:not(:first-child){

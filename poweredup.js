@@ -122,7 +122,7 @@ var PoweredUp = function(){
 		 *			until the stopMotors function is run
 		 * @param - left, right: speed of left and right motor
 		*/
-		"driveInf" = function(left, right) {
+		"driveInf":function(left, right) {
 			cmd = new Uint8Array([
 				0x08, 0x00, 0x81, 0x39, 0x11, 0x02, left, right
 			]);
