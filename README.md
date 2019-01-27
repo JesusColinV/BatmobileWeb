@@ -14,7 +14,7 @@ Much of the bluetooth groundwork has been done by [JorgePe](https://github.com/J
 Additional required bluetooth Data sniffed using [nrF Connect for Mobile](https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp&hl=en_SG)
 
 Some code referenced from: https://github.com/BluetoothRocks/Batmobile
-Joystick used from: https://github.com/jeromeetienne/virtualjoystick.js
+Joystick from: https://github.com/yoannmoinet/nipplejs
 
 ## How does this work?
 

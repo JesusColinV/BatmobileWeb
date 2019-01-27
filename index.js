@@ -105,34 +105,34 @@ function init(){
 	/* Hide or show control instructions */
 	var debug = true;
 
-	if(Joystick.touchScreenAvailable() || debug){
+	if(touchScreenAvailable() || debug){
 		/* Initialise Joysticks */
 		var i;
 		var _dirs = ["left","right"]
 		var joyOpt = {};
+		var joySize = 100;
+		var joyPadd = 35;
 
 		for(i=0;i<_dirs.length;i++){
 			var _dir = _dirs[i];
 			var containerEle = document.getElementById("joystick_"+_dir)
+
 			joyOpt[_dir] = {
-				"mouseSupport": debug,
-				"stationaryBase": true,
-				"limitStickTravel": true,
-				"baseX": (_dir=="left") ? 90 : window.outerWidth - 90,
-				"baseY": window.outerHeight-165,
-				"strokeStyle": "#ABD6F4",
-				"container":containerEle
-				/*
-				"relative": false,
-				"stickElement": containerEle.getElementsByClassName("joystickStick")[0],
-				"baseElement": containerEle.getElementsByClassName("joystickBase")[0]
-				//*/
-			}
+               "zone": containerEle,
+               "mode": 'static',
+               "position": {
+				   "bottom": (joySize/2+joyPadd)+'px'
+			   },
+			   "color": "lightblue",
+               "size": joySize
+           };
+
+		   joyOpt[_dir].position[_dir] = (joySize/2+joyPadd)+'px'
 		}
 
 		var joysticks = {
-			"left": new Joystick(joyOpt.left),
-			"right": new Joystick(joyOpt.right)
+			"left": nipplejs.create(joyOpt.left),
+			"right": nipplejs.create(joyOpt.right)
 		}
 	}
 	else{
@@ -212,6 +212,10 @@ String.prototype.toTitleCase = function() {
 	str = str.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'), uppers[i].toUpperCase());
 
 	return str;
+}
+
+var touchScreenAvailable = function(){
+	return ('ontouchstart' in window || navigator.msMaxTouchPoints)
 }
 
 var isMobile = function() {
