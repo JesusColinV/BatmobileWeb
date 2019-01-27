@@ -84,7 +84,7 @@ var PoweredUp = function(){
 		}
 		else{
 			try{
-				bluetoothDevice.gatt.disconnect();
+				this.device.gatt.disconnect();
 				log("[INFO] Bluetooth device disconnected.")
 			}
 			catch(err){
