@@ -123,7 +123,8 @@ var PoweredUp = function(){
 			// - Right/default: 0x00
 			// - Left: 0x01
 			port = (_port=="left" || _port==1)?0x01:0x00;
-			speed *= (_port == 1)?1:-1; //right motor turns in the opposite (anti-clockwise) direction
+
+			if(port==1) speed = -speed; 
 
 			cmd = new Uint8Array([
 				0x0a, 0x00, 0x81, port, 0x11, 0x60, 0x00, speed, time, 0x00
@@ -144,7 +145,8 @@ var PoweredUp = function(){
 			self.command.send(cmd);
 		},
 		"stop":function(){
-			this.drive(0,0)
+			this.drive(0,0,0);
+			this.drive(1,0,0);
 		}
 	}
 

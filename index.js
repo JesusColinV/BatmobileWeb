@@ -1,5 +1,5 @@
-var emulateState = false;
-var lightsState = false;
+/* Debug */
+var debug = false;
 
 /* Keyboard events */
 var lastKey = null;
@@ -8,14 +8,15 @@ var turn = false;
 var batmobile = new PoweredUp();
 
 var keyCodes = {
-	"left_forward":[87],
-	"left_back":[83],
-	"right_forward":[73],
-	"right_back":[75],
-	"forward":[38],
-	"backward":[40],
-	"left":[37],
-	"right":[39]
+	"left_forward":[87],	//W
+	"left_back":[83],		//S
+	"right_forward":[73],	//I
+	"right_back":[75],		//J
+	"forward":[38],			//UP
+	"backward":[40],		//DOWN
+	"left":[37],			//LEFT
+	"right":[39],			//RIGHT
+	"stop":[32, 13]			//SPACE, ENTER
 }
 var keyFunctions = {
 	"left_forward":{
@@ -62,8 +63,8 @@ var keyFunctions = {
 	},
 	"backward":{
 		"drive": function(){
-			batmobile.motors.drive("right",batmobile.motors.max_speed);
-			batmobile.motors.drive("left",batmobile.motors.max_speed);
+			batmobile.motors.drive("right",-batmobile.motors.max_speed);
+			batmobile.motors.drive("left",-batmobile.motors.max_speed);
 		},
 		"stop":function(){
 			batmobile.motors.stop();
@@ -82,6 +83,14 @@ var keyFunctions = {
 		"drive": function(){
 			batmobile.motors.drive("right",-batmobile.motors.max_speed);
 			batmobile.motors.drive("left",batmobile.motors.max_speed);
+		},
+		"stop":function(){
+			batmobile.motors.stop();
+		}
+	},
+	"stop":{
+		"drive":function(){
+			batmobile.motors.stop();
 		},
 		"stop":function(){
 			batmobile.motors.stop();
@@ -109,8 +118,6 @@ var joyPadd = 35;
 
 function init(){
 	/* Hide or show control instructions */
-	var debug = true;
-
 	if(touchScreenAvailable() || debug){
 		/* Initialise Joysticks */
 		var i;
