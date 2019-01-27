@@ -101,38 +101,52 @@ for(var _i in keyCodes){
 	}
 }
 
+/* Joysticks */
+var joysticks = {};
+var joyOpt = {};
+var joySize = 100;
+var joyPadd = 35;
+
 function init(){
 	/* Hide or show control instructions */
-	var debug = true;
+	var debug = false;
 
 	if(touchScreenAvailable() || debug){
 		/* Initialise Joysticks */
 		var i;
 		var _dirs = ["left","right"]
-		var joyOpt = {};
-		var joySize = 100;
-		var joyPadd = 35;
 
 		for(i=0;i<_dirs.length;i++){
 			var _dir = _dirs[i];
 			var containerEle = document.getElementById("joystick_"+_dir)
 
 			joyOpt[_dir] = {
-               "zone": containerEle,
-               "mode": 'static',
-               "position": {
-				   "bottom": (joySize/2+joyPadd)+'px'
+               zone: containerEle,
+               mode: 'static',
+               position: {
+				   bottom: (joySize/2+joyPadd)+'px'
 			   },
-			   "color": "lightblue",
-               "size": joySize
+			   multitouch:true,
+			   color: "lightblue",
+               size: joySize,
+			   lockY: true  // only move on the Y axis
            };
 
 		   joyOpt[_dir].position[_dir] = (joySize/2+joyPadd)+'px'
 		}
 
-		var joysticks = {
+		joysticks = {
 			"left": nipplejs.create(joyOpt.left),
 			"right": nipplejs.create(joyOpt.right)
+		}
+
+		for(i=0;i<_dirs.length;i++){
+			joysticks[_dirs[i]].on("move",function(e, data){
+				_port = _dirs[e.target.id];
+				_spd = data.distance/(joySize/2)*batmobile.motors.max_speed;
+				_dir = (data.direction.y == "down")?-1:1;
+				batmobile.motors.drive(_port, _dir*_spd, 0);
+			})
 		}
 	}
 	else{
