@@ -109,7 +109,7 @@ var joyPadd = 35;
 
 function init(){
 	/* Hide or show control instructions */
-	var debug = false;
+	var debug = true;
 
 	if(touchScreenAvailable() || debug){
 		/* Initialise Joysticks */
@@ -151,7 +151,7 @@ function init(){
 	}
 	else{
 		document.getElementById("controls-touch").style.display = "none";
-		document.getElementById("joystickControls").style.display = "none";
+		document.getElementById("joystick-container").style.display = "none";
 	}
 
 	if(isMobileAndTablet() && !debug){
