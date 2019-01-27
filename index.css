@@ -78,6 +78,38 @@ tr:first-child{
 	margin-bottom:25px;
 }
 
+#joystickControls{
+	height:120px;
+	width:100%;
+
+	position: fixed;
+	bottom:0px;
+	z-index:100;
+}
+
+.joystick{
+	background:azure;
+	height:90px;
+	width:90px;
+	z-index: 101;
+}
+
+#joystick_left{
+	left:0;
+}
+
+#joystick_right{
+	right:0;
+}
+
+.joystickBase{
+
+}
+
+.joystickStick{
+
+}
+
 .y-separator, .y-padding{
 	display:block;
 	clear:both;
@@ -96,17 +128,6 @@ tr:first-child{
 	display:inline-block;
 	width:5px;
 	padding: 5px 0px;
-}
-
-#joystickControls{
-	background: azure;
-	opacity: 0;
-	height:90px;
-	width:100%;
-
-	position: fixed;
-	bottom:0px;
-	z-index:1000000;
 }
 
 #controls, .controls{

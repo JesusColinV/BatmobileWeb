@@ -18,10 +18,10 @@ var Joystick = function(opts) {
 
 	this._container.appendChild(this._baseEl)
 	this._baseEl.style.position	= "absolute"
-	this._baseEl.style.display	= "none"
+	//this._baseEl.style.display	= "none"
 	this._container.appendChild(this._stickEl)
 	this._stickEl.style.position	= "absolute"
-	this._stickEl.style.display	= "none"
+	//this._stickEl.style.display	= "none"
 
 	this._pressed	= false;
 	this._touchIdx	= null;
@@ -70,9 +70,9 @@ Joystick.prototype.destroy	= function()
 /**
  * @returns {Boolean} true if touchscreen is currently available, false otherwise
 */
-Joystick.touchScreenAvailable	= function()
+Joystick.touchScreenAvailable = function()
 {
-	return 'createTouch' in document ? true : false;
+	return ('ontouchstart' in window || navigator.msMaxTouchPoints);
 }
 
 /**

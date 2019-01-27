@@ -111,9 +111,11 @@ var PoweredUp = function(){
 		 * - time: probably CPU ticks. 0 or null for infinite
 		*/
 		"drive":function(_port, speed, time){
-			if(!time || time == null || typeof time=="undefined"){
+			if(time == null || typeof time=="undefined" || time<0){
 				time = 0x00; //indefinite running
 			}
+			else if(time > 0xFF) time = 0xFF
+
 			//Cap speed
 			speed = Math.min(Math.max(speed,-this.max_speed),this.max_speed);
 
@@ -121,7 +123,7 @@ var PoweredUp = function(){
 			// - Right/default: 0x00
 			// - Left: 0x01
 			port = (_port=="left" || _port==1)?0x01:0x00;
-			speed = -1*(port^1)*speed; //right motor turns in the opposite (anti-clockwise) direction
+			speed *= (_port == 1)?1:-1; //right motor turns in the opposite (anti-clockwise) direction
 
 			cmd = new Uint8Array([
 				0x0a, 0x00, 0x81, port, 0x11, 0x60, 0x00, speed, time, 0x00

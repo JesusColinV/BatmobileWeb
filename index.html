@@ -20,7 +20,7 @@
 		<div class="flex-container">
 			<div id="instructions" class="flex-item flex-50">
 				<h1 class="smallcaps title">Controls</h1>
-				<div class="flex-container controls-container" id="controls-computer">
+				<div class="flex-container controls-container" id="controls-keyboard">
 					<div class="flex-item border-override">
 						<h2 class="smallcaps">Motor</h2>
 						<table class="control-table">
@@ -51,7 +51,7 @@
 						</table>
 					</div>
 				</div>
-				<div id="controls-mobile" class="controls-container">
+				<div id="controls-touch" class="controls-container">
 					<h2 class="smallcaps">Joysticks</h2>
 					<div>Use the joysticks to control the left and right motors respectively.</div>
 				</div>
@@ -65,8 +65,14 @@
 				</div>
 			</div>
 			<div id="joystickControls">
-				<div class="joystick" id="joystick1"></div>
-				<div class="joystick" id="joystick2"></div>
+				<div class="joystick" id="joystick_left">
+					<div class="joystickBase"></div>
+					<div class="joystickStick"></div>
+				</div>
+				<div class="joystick" id="joystick_right">
+					<div class="joystickBase"></div>
+					<div class="joystickStick"></div>
+				</div>
 			</div>
 		</div>
 
