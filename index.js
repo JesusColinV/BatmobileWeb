@@ -118,11 +118,15 @@ function init(){
 				"mouseSupport": debug,
 				"stationaryBase": true,
 				"limitStickTravel": true,
-				"baseX":200,
-				"baseY":0,
-				"container": containerEle,
+				"baseX": (_dir=="left") ? 90 : window.outerWidth - 90,
+				"baseY": window.outerHeight-165,
+				"strokeStyle": "#ABD6F4",
+				"container":containerEle
+				/*
+				"relative": false,
 				"stickElement": containerEle.getElementsByClassName("joystickStick")[0],
 				"baseElement": containerEle.getElementsByClassName("joystickBase")[0]
+				//*/
 			}
 		}
 
