@@ -71,7 +71,11 @@ tr:first-child{
 	vertical-align: middle;
 	font-size:16px;
 	width:65px;
-	padding:3px 10px;
+	padding:3px 3px;
+}
+
+.controls-container{
+	margin-bottom:25px;
 }
 
 .y-separator, .y-padding{
@@ -95,9 +99,14 @@ tr:first-child{
 }
 
 #joystickControls{
-	background: rgba(255,255,255,0.5);
-	height:40px;
+	background: azure;
+	opacity: 0;
+	height:90px;
+	width:100%;
+
+	position: fixed;
 	bottom:0px;
+	z-index:1000000;
 }
 
 #controls, .controls{
@@ -105,6 +114,10 @@ tr:first-child{
 	padding: 10px;
 	border-bottom: 1px solid black;
 	margin-bottom: 10px;
+}
+
+#logs{
+	width:30%;
 }
 
 #logs *:not(.title):not(.button){
