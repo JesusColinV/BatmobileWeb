@@ -1,3 +1,29 @@
+@font-face {
+	font-family: "AvenirLight";
+	src: url(fonts/Avenir-Light.ttf);
+	font-weight: normal;
+}
+@font-face {
+	font-family: "Avenir";
+	src: url(fonts/Avenir-Light.ttf);
+	font-weight: normal;
+}
+@font-face {
+	font-family: "Avenir";
+	src: url(fonts/Avenir-Heavy.ttf);
+	font-weight: bold;
+}
+@font-face {
+	font-family: "AvenirMedium";
+	src: url(fonts/Avenir-Medium.ttf);
+	font-weight: normal;
+}
+@font-face {
+	font-family: "AvenirMedium";
+	src: url(fonts/Avenir-Heavy.ttf);
+	font-weight: bold;
+}
+
 *{
 	font-family: "Avenir", Calibri, sans-serif;
 	font-size: 15px;
@@ -156,6 +182,7 @@ tr:first-child{
 	text-decoration: none;
 	display: inline-block;
 	margin:4px 2px;
+	font-family: AvenirMedium;
 	font-weight: normal;
 	font-variant-caps: normal;
 	cursor: pointer;
