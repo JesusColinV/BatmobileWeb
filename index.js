@@ -154,6 +154,11 @@ function init(){
 				_dir = (data.direction.y == "down")?-1:1;
 				batmobile.motors.drive(_port, _dir*_spd, 0);
 			})
+
+			joysticks[_dirs[i]].on("end",function(e, data){
+				_port = _dirs[e.target.id];
+				batmobile.motors.drive(_port, 0, 0);
+			})
 		}
 	}
 	else{
@@ -199,7 +204,10 @@ function init(){
 			keyEvents[k]["stop"]();
 			keyEvents[k].active = false;
 
-			log("[COMMAND] Stop "+keyEvents[k]["name"].replaceAll("_"," ").toTitleCase()) //for logging purposes
+			if(keyEvents[k]["name"] == "stop"){
+				log("[COMMAND] Stop Motors!")
+			} else
+				log("[COMMAND] Stop "+keyEvents[k]["name"].replaceAll("_"," ").toTitleCase()) //for logging purposes
 		}
 	})
 }
