@@ -110,6 +110,13 @@ tr:first-child{
 	height:150px;
 }
 
+#joystick-padding{
+	display:block;
+	width:100%;
+	height:150px;
+}
+
+
 #joystick_left{
 
 }
