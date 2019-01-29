@@ -116,11 +116,15 @@ var joyOpt = {};
 var joySize = 100;
 var joyPadd = 35;
 
+/* Motor Control */
+var motors_ports = [ "left", "right", "both" ];
+
 function init(){
+	var i,j;
+
 	/* Hide or show control instructions */
 	if(touchScreenAvailable() || debug){
 		/* Initialise Joysticks */
-		var i;
 		var _dirs = ["left","right"]
 
 		for(i=0;i<_dirs.length;i++){
@@ -184,6 +188,32 @@ function init(){
 		batmobile.disconnect();
 	});
 
+	/* Motor Control */
+	var inputEles = {
+		"input_cpu_cycles": document.getElementById("input_cpu_cycles"),
+		"input_speed": document.getElementById("input_speed")
+	}
+
+	for(var i=0;i<motors_ports.length;i++){
+		document.getElementById("move_motor_"+motors_ports[i]).addEventListener("mouseup",function(e){
+			var id = e.target.id;
+			var m_dir = id.split("_")[2];
+			var cpu_cycles = parseInt(inputEles["input_cpu_cycles"].value);
+			var speed = parseInt(inputEles["input_cpu_cycles"].value);
+
+			if(isNaN(cpu_cycles)) cpu_cycles = 0;
+			if(isNaN(speed)) speed = batmobile.motors.max_speed;
+
+			if(m_dir == "left" || m_dir == "both"){
+				batmobile.motors.drive("left",speed,cpu_cycles);
+			}
+			if(m_dir == "right" || m_dir == "both"){
+				batmobile.motors.drive("left",speed,cpu_cycles);
+			}
+		})
+	}
+
+	/* Key Events*/
 	document.addEventListener("keydown", function(event){
 		var k = event.keyCode;
 

@@ -8,17 +8,18 @@
 	</head>
 
 	<body>
-		<div class="controls">
+		<div id="controls">
 			<h1 class="title">Batmobile Bluetooth Test
 				<div class="version">v2.2.4</div>
 			</h1>
-			<div>
+			<div id="connection_controls">
 				<div class="button" id="connect">Connect</div>
 				<div class="button" id="disconnect">Disconnect</div>
 			</div>
-			<div class="motor_control">
+			<div id="y-padding"></div>
+			<div id="motor_control">
 				CPU Cycles: <input type="number" min="0" max="1000" id="input_cpu_cycles" value="0" />
-				Speed: <input type="number" min="-126" max="126" id="input_cpu_cycles" value="126" />
+				Speed: <input type="number" min="-126" max="126" id="input_speed" value="126" />
 				<div class="x-separator"></div>
 				<div class="button" id="move_motor_left">Left Motor</div>
 				<div class="button" id="move_motor_right">Right Motor</div>
@@ -39,10 +40,12 @@
 							<tr>
 								<th>Left</th>
 								<th>Right</th>
+								<th>Stop</th>
 							</tr>
 							<tr>
 								<td>W/S</td>
 								<td>I/K</td>
+								<td>Space<br>Enter</td>
 							</tr>
 						</table>
 					</div>
