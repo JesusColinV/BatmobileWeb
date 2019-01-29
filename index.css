@@ -110,11 +110,11 @@ tr:first-child{
 	height:150px;
 }
 
-#joystick-padding{
+.joystick-padding{
 	display:block;
 	width:100%;
-	padding-top:100px;
-	padding-bottom:100px;
+	padding-top:80px;
+	padding-bottom:80px;
 }
 
 #joystick_left{
