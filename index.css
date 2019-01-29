@@ -173,6 +173,11 @@ tr:first-child{
 	font-variant-caps: small-caps;
 }
 
+input{
+	padding:5px;
+	margin:0px 2px;
+}
+
 .button {
 	-webkit-touch-callout: none; /* iOS Safari */
 	-webkit-user-select: none; /* Safari */
