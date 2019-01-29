@@ -196,19 +196,21 @@ function init(){
 
 	for(var i=0;i<motors_ports.length;i++){
 		document.getElementById("move_motor_"+motors_ports[i]).addEventListener("mouseup",function(e){
-			var id = e.target.id;
-			var m_dir = id.split("_")[2];
+			var m_dir = e.target.id.split("_")[2];
+
 			var cpu_cycles = parseInt(inputEles["input_cpu_cycles"].value);
-			var speed = parseInt(inputEles["input_cpu_cycles"].value);
+			var speed = parseInt(inputEles["input_speed"].value);
+
+			console.log(m_dir, cpu_cycles, speed);
 
 			if(isNaN(cpu_cycles)) cpu_cycles = 0;
 			if(isNaN(speed)) speed = batmobile.motors.max_speed;
 
 			if(m_dir == "left" || m_dir == "both"){
-				batmobile.motors.drive("left",speed,cpu_cycles);
+				batmobile.motors.drive("left",speed, cpu_cycles);
 			}
 			if(m_dir == "right" || m_dir == "both"){
-				batmobile.motors.drive("left",speed,cpu_cycles);
+				batmobile.motors.drive("right",speed, cpu_cycles);
 			}
 		})
 	}
