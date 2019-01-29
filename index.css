@@ -144,8 +144,9 @@ tr:first-child{
 }
 
 #controls, .controls{
+	display:block;
 	background:azure;
-	padding: 10px;
+	padding: 10px 20px;
 	border-bottom: 1px solid black;
 	margin-bottom: 10px;
 }
