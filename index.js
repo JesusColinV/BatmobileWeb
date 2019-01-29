@@ -213,6 +213,17 @@ function init(){
 				batmobile.motors.drive("right",speed, cpu_cycles);
 			}
 		})
+
+		document.getElementById("stop_motor_"+motors_ports[i]).addEventListener("mouseup",function(e){
+			var m_dir = e.target.id.split("_")[2];
+
+			if(m_dir == "left" || m_dir == "both"){
+				batmobile.motors.drive("left",0,0);
+			}
+			if(m_dir == "right" || m_dir == "both"){
+				batmobile.motors.drive("right",0,0);
+			}
+		})
 	}
 
 	/* Key Events*/
